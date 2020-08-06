@@ -128,11 +128,12 @@
       .html(
         "<div style='padding: 10px'><img width='90px' src=" + d.Player_image + "></div><div>" + 
         "<h3>" + d.Player_name + "</h3><p>" + 
+        "State: <span>" + d.State + "</span></p><p>" + 
         "Birthplace: <span>" + d.Birthplace + "</span></p><p>" + 
-        "Population of birthplace: <span>" + d.population + "</span></p><p>" + 
+        "Birthplace Pop.: <span>" + d.population + "</span></p><p>" + 
         "Role: <span>" + d.Major_contribution + "</span></p><p>" +         
         "Number of matches: <span>" + d.Number_of_ODIs_played + "</span></p>" + 
-        "<a href=" + d.Player_url + " target='_blank'>URL</a>"
+        "<a href=" + d.Player_url + " target='_blank'>Cricinfo profile</a>"
       )
       .style("left", (d3.event.clientX + 25).toString() + "px")
       .style("top", (d3.event.clientY - 70).toString() + "px")
