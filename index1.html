@@ -81,7 +81,7 @@
     .attr('transform', 'translate(92, 30)')
 
   title.append("text")
-    .text('Cricket Players')
+    .text('Indian Cricketers')
     .style('font-size', '2em')
 
   const projection = d3.geoMercator()
@@ -129,6 +129,7 @@
         "<div style='padding: 10px'><img width='90px' src=" + d.Player_image + "></div><div>" + 
         "<h3>" + d.Player_name + "</h3><p>" + 
         "Birthplace: <span>" + d.Birthplace + "</span></p><p>" + 
+        "Population of birthplace: <span>" + d.population + "</span></p><p>" + 
         "Role: <span>" + d.Major_contribution + "</span></p><p>" +         
         "Number of matches: <span>" + d.Number_of_ODIs_played + "</span></p>" + 
         "<a href=" + d.Player_url + " target='_blank'>URL</a>"
