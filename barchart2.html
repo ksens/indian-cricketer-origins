@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script> 
+</head>
+<body>
+<div class='chart'></div>
+<script src="./js/updateChart.js"></script>
+<script>
+  let clicked = false
+  const margin = {top: 30, right: 30, bottom: 30, left: 80};
+  const width = 500 - margin.left - margin.right;
+  const height = 300 - margin.top - margin.bottom;
+
+ const svg = d3.select(".chart")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+  Promise.all([
+    d3.csv ('./data/Population.csv')
+  ]).then(
+    d => ready(null, d[0])
+  );
+
+  function ready(error, popn) {
+
+    popn.forEach(d=>{
+      d.classification = classification(+d.population)
+    })
+
+    popnGrp = d3.nest()
+      .key(d=>d.classification)
+      .rollup(function(leaves) { return d3.sum(leaves, d=>+d.population) })
+      .entries(popn)
+
+    // Initialize the plot
+    update(popnGrp)
+
+  }
+
+</script>
+</body>
+</html>
