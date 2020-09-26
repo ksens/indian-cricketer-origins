@@ -47,18 +47,18 @@
 </head>
 <body>
 <div class='chart'></div>
-<script src="./js/map.js"></script>
+<script src="../js/map.js"></script>
 <script>
   Promise.all([
-    d3.json('./data/india_district_filtered.geojson'),
-    d3.json('./data/Indian_States.geojson'),
-    d3.csv ('./data/odi-cricketers.csv')
+    d3.json('../data/india_district_filtered.geojson'),
+    d3.json('../data/Indian_States.geojson'),
+    d3.csv ('../data/odi-cricketers.csv')
   ]).then(
     d => ready(null, d[0], d[1], d[2])
   );
 
   function ready(error, districts, states, players) {
-    drawMap(districts, states, players, 'adjusted_chennai_bangalore')
+    drawMap(districts, states, players, 'adjusted_delhi')
   }
 
 </script>
