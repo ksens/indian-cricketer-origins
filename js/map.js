@@ -184,7 +184,7 @@ function drawMap(districts, states, players, type) {
 function drawMarkers(data, svg, projection) {
   
   let {mouseover, mouseleave} = tooltip(svg)
-  let sortingArr = ['> 5 million', '1-5 million', '< 1 million']
+  let sortingArr = ['> 6 million', '1-6 million', '< 1 million']
   let roles = data.map(d=>d.classification).filter(onlyUnique)
 
   roles = roles.sort((a, b) => {
@@ -359,10 +359,10 @@ function onlyUnique(value, index, self) {
 }
 
 function classification(d){
-  if(d > 5000000){
-    return '> 5 million'
-  } else if(d > 1000000 & d <= 5000000){
-    return '1-5 million'
+  if(d > 6000000){
+    return '> 6 million'
+  } else if(d > 1000000 & d <= 6000000){
+    return '1-6 million'
   } else if(d <= 1000000){
     return '< 1 million'
   }

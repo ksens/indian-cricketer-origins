@@ -1,6 +1,6 @@
 function update(data) {
 
-  const sortingArr = ['< 1 million', '1-5 million', '> 5 million']
+  const sortingArr = ['< 1 million', '1-6 million', '> 6 million']
   const categories = data.map(function(d) { return d.key; })
 
   const categoriesSorted = categories.sort((a, b) => {
@@ -44,10 +44,10 @@ function update(data) {
 }
 
 function classification(d){
-  if(d > 5000000){
-    return '> 5 million'
-  } else if(d > 1000000 & d <= 5000000){
-    return '1-5 million'
+  if(d > 6000000){
+    return '> 6 million'
+  } else if(d > 1000000 & d <= 6000000){
+    return '1-6 million'
   } else if(d <= 1000000){
     return '< 1 million'
   }
