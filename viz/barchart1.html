@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class='chart'></div>
-<script src="./js/updateChart.js"></script>
+<script src="../js/updateChart.js"></script>
 <script>
 
   const margin = {top: 30, right: 30, bottom: 30, left: 30};
@@ -22,7 +22,7 @@
           "translate(" + margin.left + "," + margin.top + ")");
 
   Promise.all([
-    d3.csv ('./data/odi-cricketers.csv')
+    d3.csv ('../data/odi-cricketers.csv')
   ]).then(
     d => ready(null, d[0])
   );
