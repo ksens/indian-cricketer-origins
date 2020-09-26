@@ -18,11 +18,12 @@ function Zoom(initZoom, svg) {
     .scaleExtent([1, 20])
     .on('zoom', zoomed);
 
-  if(initZoom !== 1){
+  if (initZoom == 2) { // delhi
     g.attr('transform', `translate(-1173.3975825439707,-163.70595060723429) scale(4)`)
-  } else {
-    svg.call(zoom)
-  }
+  } if (initZoom == 3){ //chennai - bangalore
+    g.attr('transform', `translate(-1173.3975825439707,-2063.70595060723429) scale(4)`)
+  } 
+  svg.call(zoom)
 
   function zoomed() {
 
@@ -159,9 +160,14 @@ function drawMap(districts, states, players, type) {
     })
 
     
-    if(type==='adjusted'){
+    if(type==='adjusted_delhi'){
 
-      Zoom(4, svg) 
+      Zoom(2, svg) 
+      drawMarkersAdj(players, g, projection)
+
+    } else if(type==='adjusted_chennai_bangalore'){
+
+      Zoom(3, svg) 
       drawMarkersAdj(players, g, projection)
 
     } else if(type==='bubble'){
