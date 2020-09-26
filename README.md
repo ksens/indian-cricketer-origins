@@ -29,7 +29,5 @@ http-server -a localhost -p 3000
 ### Steps to embed the map inside a github.io page
 
 1. Copy and paste the india_players folder to the github repo at the root level. (ie. 'india_players' folder will be at the same folder structure level as '_posts').
-
 2. Create new .md page inside the _posts folder.
-
 3. Since markdown supports inline html, insert `<iframe src='../index.html' width='1000' height='750' frameborder='0'></iframe>` in the location where you want to map to be displayed. (Ensure file path is correct)
