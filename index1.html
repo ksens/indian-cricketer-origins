@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <style>
+    .wrapper {
+      position: relative;
+    }
+    .chart {
+      position: relative;
+    }
+    .tooltip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 300px;
+      height: 140px;
+      opacity: 0;
+      background-color: white;
+      border: solid;
+      border-width: 1px;
+      border-radius: 5px;
+      padding: 4px;
+      font-family: courier;
+    }
+    .tooltip p {
+      font-size: 12px;
+      margin: 3px 0px;
+    }
+    .tooltip h3 {
+      margin: 0px 0px 10px 0px;
+    }
+    .tooltip a {
+      font-size: 12px;
+      color: navy;
+    }
+    .tooltip span {
+      font-weight: bold;
+    }
+    text {
+      font-family: courier;
+      font-size: 11px;
+      fill: black;
+    }
+    .buttons {
+      position: absolute;
+      bottom: 45px;
+      left: 92px;
+    }
+  </style> 
+</head>
+<body>
+<div class='wrapper'>
+  <div class='chart'></div>
+  <div class='buttons'>
+    <button id="zoom-in">+</button>
+    <button id="zoom-out">-</button>
+  </div>
+</div>
+<script src="./js/map.js"></script>
+<script>
+  Promise.all([
+    d3.json('./data/india_district_filtered.geojson'),
+    d3.json('./data/Indian_States.geojson'),
+    d3.csv ('./data/Cricketers1.csv')
+  ]).then(
+    d => ready(null, d[0], d[1], d[2])
+  );
+
+  function ready(error, districts, states, players) {
+    drawMap(districts, states, players, 'bubble')
+  }
+
+</script>
+</body>
+</html>
