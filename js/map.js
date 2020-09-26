@@ -234,7 +234,8 @@ function drawMarkersAdj(data, svg, projection) {
   let {mouseover, mouseleave} = tooltip(svg)
   let roles = data.map(d=>d.classification).filter(onlyUnique)
 
-  let colorScale = d3.scaleOrdinal(d3.schemeDark2)
+  let colorScale = d3.scaleOrdinal()
+    .range(['orange', 'blue', 'green'])
     .domain(roles)
 
   let colorAccessor = (d) => colorScale(d.classification)
