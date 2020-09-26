@@ -8,7 +8,7 @@ function update(data) {
   })
 
   let colorScale = d3.scaleOrdinal()
-    .range(['orange', 'blue', 'green'])
+    .range(['green', 'blue', 'orange'])
     .domain(categoriesSorted)
 
   let colorAccessor = (d) => colorScale(d.key)
