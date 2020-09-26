@@ -22,7 +22,7 @@
           "translate(" + margin.left + "," + margin.top + ")");
 
   Promise.all([
-    d3.csv ('./data/Cricketers1.csv')
+    d3.csv ('./data/odi-cricketers.csv')
   ]).then(
     d => ready(null, d[0])
   );

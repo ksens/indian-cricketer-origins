@@ -66,7 +66,7 @@
   Promise.all([
     d3.json('./data/india_district_filtered.geojson'),
     d3.json('./data/Indian_States.geojson'),
-    d3.csv ('./data/Cricketers1.csv')
+    d3.csv ('./data/odi-cricketers.csv')
   ]).then(
     d => ready(null, d[0], d[1], d[2])
   );
