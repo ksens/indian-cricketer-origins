@@ -20,11 +20,13 @@ http-server -a localhost -p 3000
 
 3. To view the map 
 
-   - with original suggested changes: [localhost:3000/](http://localhost:3000/index.html)
+   - view the map with markers sized by number of ODIs played: [localhost:3000/viz/](http://localhost:3000/viz/index.html)
 
-   - to view the map with markers sized by number of ODIs played: [localhost:3000/index1.html](http://localhost:3000/index1.html)
+   - to zoom in on delhi: [localhost:3000/viz/delhi](http://localhost:3000/viz/delhi.html)
 
-   - to test how the map looks like inside an iframe: [localhost:3000/test.html](http://localhost:3000/test.html)
+   - to zoom in on chennai and bangalore: [localhost:3000/viz/chennai](http://localhost:3000/viz/chennai.html)
+
+   - to test how the map looks like inside an iframe, see this [viz](http://kritisen.com/2020-08-06-map-of-indian-cricketers/) and [code](https://github.com/ksens/ksens.github.io/blob/master/_posts/2020-08-06-map-of-indian-cricketers.md)
 
 ### Steps to embed the map inside a github.io page
 
