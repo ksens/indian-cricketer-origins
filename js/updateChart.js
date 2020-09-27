@@ -1,4 +1,4 @@
-function update(data) {
+function update(data, data1, xLabel, yLabel, yFormat, column) {
 
   const sortingArr = ['< 1 million', '1-6 million', '> 6 million']
   const categories = data.map(function(d) { return d.key; })
@@ -22,12 +22,25 @@ function update(data) {
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x))
 
+  svg.append("text")
+    .attr("transform", `translate(${width/2}, ${height+40})`)
+    .attr('text-anchor', 'middle')
+    .attr("font-size", '11px')
+    .text(xLabel)
+
   const y = d3.scaleLinear()
     .domain([0, d3.max(data, d=>d.value)])
     .range([ height, 0]);
+
   svg.append("g")
     .attr("class", "myYaxis")
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y).tickFormat(yFormat));
+
+  svg.append("text")
+    .attr("transform", `translate(-40,${height/2})rotate(-90)`)
+    .attr('text-anchor', 'middle')
+    .attr("font-size", '11px')
+    .text(yLabel)
 
   const bar = svg.selectAll("rect")
     .data(data)
@@ -41,6 +54,28 @@ function update(data) {
       .attr("width", x.bandwidth())
       .attr("height", function(d) { return height - y(d.value); })
       .attr("fill", colorAccessor)
+      .on("mouseover", function(d) { 
+         let items = data1.find(el=>el.key === d.key).values.map(el=>el[column])
+         let list = []
+         items.forEach(el=>{
+          list.push(el.split(',') + "<br>")
+         })
+         d3.select('.tooltip')
+           //.style('top', `${d3.select(this).attr('y')+30}px`)
+           .style('top', `${height+80}px`)
+           .style('left', `${+d3.select(this).attr('x')+120}px`)
+           //.style('left', `${+d3.select(this).attr('x')+x.bandwidth()/2+120}px`)
+           .style('visibility', 'visible')
+           .html(list)
+      })
+      .on("mouseout", function() { 
+         d3.select('.tooltip')
+           .style('top', '0px')
+           .style('left', '0px')
+           .style('visibility', 'hidden')
+           .html("")
+      })
+
 }
 
 function classification(d){
