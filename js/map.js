@@ -1,12 +1,7 @@
 let clicked = false
-const margin = {top: 0, right: 0, bottom: 0, left: 0};
-const width = 850 - margin.left - margin.right;
-const height = width*0.85 - margin.top - margin.bottom;
 
 const svg = d3.select('.chart')
   .append('svg')
-  .attr('width', width)
-  .attr('height', height)
 
 const g = svg.append('g')
   .attr('class', 'map')
@@ -19,9 +14,9 @@ function Zoom(initZoom, svg) {
     .on('zoom', zoomed);
 
   if (initZoom == 2) { // delhi
-    g.attr('transform', `translate(-1173.3975825439707,-163.70595060723429) scale(4)`)
+    g.attr('transform', `translate(-500.3975825439707,-80.70595060723429) scale(4)`)
   } if (initZoom == 3){ //chennai - bangalore
-    g.attr('transform', `translate(-1173.3975825439707,-2063.70595060723429) scale(4)`)
+    g.attr('transform', `translate(-500.3975825439707,-1000.70595060723429) scale(4)`)
   } 
   svg.call(zoom)
 
@@ -92,7 +87,14 @@ function tooltip(svg) {
   return {mouseover, mouseleave}
 }
 
-function drawMap(districts, states, players, type) {
+function drawMap(districts, states, players, type, zoomed) {
+
+  const margin = {top: 0, right: 0, bottom: 0, left: 0};
+  const width = zoomed ? 400 : 850 - margin.left - margin.right;
+  const height = width*0.85 - margin.top - margin.bottom;
+
+  svg.attr('width', width)
+    .attr('height', height)
 
   const projection = d3.geoMercator()
     .center([78.9629, 20.5937])
@@ -145,6 +147,7 @@ function drawMap(districts, states, players, type) {
       .attr('dy', '-1.25em')
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "central")
+      .attr("font-size", zoomed ? '4px' : "10px")
       .text(function (d) { 
         if(d.properties.NAME_2 === "Bangalore Urban"){
           return "Bangalore"
@@ -277,7 +280,7 @@ function drawLegend(data, scale, svg) {
   let R = 8
   const svgLegend = svg.append('g')
     .attr('class', 'legend')
-    .attr('transform', 'translate(0, 40)')
+    .attr('transform', 'translate(-30, 30)')
 
   svgLegend.append('text')
     .attr("transform", function (d, i) {return "translate(92," + 25 + ")"})
@@ -302,6 +305,7 @@ function drawLegend(data, scale, svg) {
       .attr("class", "legend-text")
       .attr("x", R*2)
       .attr("y", R/2)
+      .attr("font-size", '11px')
       .text(d=>d)
 
 }
