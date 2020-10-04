@@ -9,8 +9,17 @@
     }
     .tooltip {
       position: absolute;
-      top: 0;
       left: 0;
+      top: 0;
+      width: auto;
+      height: auto;
+      background-color: white;
+      border: solid;
+      border-width: 1px;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 10px;
+      font-family: courier;
       visibility: hidden;
     }
   </style>
@@ -55,7 +64,7 @@
       .entries(popn)
 
     // Initialize the plot
-    update(popnGrp, popnValues, "Birthplace population", "Sum of populations of birthplaces in group", d3.formatPrefix(".0", 1e6), "Birthplace")
+    update(popnGrp, popnValues, "Birthplace population", "Sum of populations of birthplaces in group", d3.formatPrefix(".0", 1e6), ["Birthplace", 'population', 'List of birthplaces'])
 
   }
 
