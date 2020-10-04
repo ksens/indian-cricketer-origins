@@ -1,4 +1,4 @@
-function update(data, data1, xLabel, yLabel, yFormat, column) {
+function update(data, data1, xLabel, yLabel, yFormat, tooltip_attrs) {
 
   const sortingArr = ['< 1 million', '1-6 million', '> 6 million']
   const categories = data.map(function(d) { return d.key; })
@@ -54,19 +54,20 @@ function update(data, data1, xLabel, yLabel, yFormat, column) {
       .attr("width", x.bandwidth())
       .attr("height", function(d) { return height - y(d.value); })
       .attr("fill", colorAccessor)
+      .attr('cursor', 'pointer')
       .on("mouseover", function(d) { 
-         let items = data1.find(el=>el.key === d.key).values.map(el=>el[column])
-         let list = []
-         items.forEach(el=>{
-          list.push(el.split(',') + "<br>")
-         })
+         let items = data1.find(el=>el.key === d.key).values.map(el=>el[tooltip_attrs[0]])
+         let items_1 = data1.find(el=>el.key === d.key).values.map(el=>el[tooltip_attrs[1]])
+         var keywordList = "<ul>";
+          for(var i = 0; i < items.length; i++){
+            tooltip_attrs[1] ? keywordList += "<li>" + items[i] + " ("+ d3.format(".2s")(items_1[i]) + " people)</li>" :  keywordList += "<li>" + items[i] + "</li>" 
+          }
+          keywordList += "</ul>";
          d3.select('.tooltip')
-           //.style('top', `${d3.select(this).attr('y')+30}px`)
-           .style('top', `${height+80}px`)
-           .style('left', `${+d3.select(this).attr('x')+120}px`)
-           //.style('left', `${+d3.select(this).attr('x')+x.bandwidth()/2+120}px`)
+           .style('top', `${d3.select(this).attr('y')+30}px`)
+           .style('left', `${+d3.select(this).attr('x')+x.bandwidth()/2+120}px`)
            .style('visibility', 'visible')
-           .html(list)
+           .html("<b>" + tooltip_attrs[2] + ": </b>" + keywordList)
       })
       .on("mouseout", function() { 
          d3.select('.tooltip')
